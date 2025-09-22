@@ -3,7 +3,9 @@ _commit: v9.0.0
 _src_path: gh:Tecnativa/doodba-copier-template
 backup_dst: ""
 cidr_whitelist: null
-domains_prod: gestion.vikingosoftware.com
+domains_prod:
+  - hosts:
+      - gestion.vikingosoftware.com
 domains_test: {}
 gitlab_url: ""
 odoo_dbfilter: ^prod
