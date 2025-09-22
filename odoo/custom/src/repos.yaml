@@ -1,0 +1,133 @@
+# See https://github.com/Tecnativa/doodba#optodoocustomsrcreposyaml
+./odoo:
+  defaults:
+    # Shallow repositories ($DEPTH_DEFAULT=1) are faster & thinner
+    # You may need a bigger depth when merging PRs (use $DEPTH_MERGE
+    # for a sane value of 100 commits)
+    depth: $DEPTH_DEFAULT
+  remotes:
+    ocb: https://github.com/OCA/OCB.git
+    odoo: https://github.com/odoo/odoo.git
+    openupgrade: https://github.com/OCA/OpenUpgrade.git
+  target: odoo $ODOO_VERSION
+  merges:
+    - odoo $ODOO_VERSION
+    # Example of a merge of the PR with the number <PR>
+    # - oca refs/pull/<PR>/head
+
+./web:
+  defaults:
+    depth: $DEPTH_DEFAULT
+  remotes:
+    web: https://github.com/OCA/web.git
+  target: web $ODOO_VERSION
+  merges:
+    - web $ODOO_VERSION
+
+./server-ux:
+  defaults:
+    depth: $DEPTH_DEFAULT
+  remotes:
+    server-ux: https://github.com/OCA/server-ux.git
+  target: server-ux $ODOO_VERSION
+  merges:
+    - server-ux $ODOO_VERSION
+
+./server-brand:
+  defaults:
+    depth: $DEPTH_DEFAULT
+  remotes:
+    server-brand: https://github.com/OCA/server-brand.git
+  target: server-brand $ODOO_VERSION
+  merges:
+    - server-brand $ODOO_VERSION
+
+./account-financial-tools:
+  defaults:
+    depth: $DEPTH_DEFAULT
+  remotes:
+    account-financial-tools: https://github.com/OCA/account-financial-tools.git
+  target: account-financial-tools $ODOO_VERSION
+  merges:
+    - account-financial-tools $ODOO_VERSION
+
+./reporting-engine:
+  defaults:
+    depth: $DEPTH_DEFAULT
+  remotes:
+    reporting-engine: https://github.com/OCA/reporting-engine.git
+  target: reporting-engine $ODOO_VERSION
+  merges:
+    - reporting-engine $ODOO_VERSION
+
+./account-financial-reporting:
+  defaults:
+    depth: $DEPTH_DEFAULT
+  remotes:
+    account-financial-reporting: https://github.com/OCA/account-financial-reporting.git
+  target: account-financial-reporting $ODOO_VERSION
+  merges:
+    - account-financial-reporting $ODOO_VERSION
+
+./queue:
+  defaults:
+    depth: $DEPTH_DEFAULT
+  remotes:
+    queue: https://github.com/OCA/queue.git
+  target: queue $ODOO_VERSION
+  merges:
+    - queue $ODOO_VERSION
+
+./cetmix-tower:
+  defaults:
+    depth: $DEPTH_DEFAULT
+  remotes:
+    cetmix-tower: https://github.com/cetmix/cetmix-tower.git
+  target: cetmix-tower $ODOO_VERSION
+  merges:
+    - cetmix-tower $ODOO_VERSION
+
+./ingadhoc-odoo-argentina:
+  defaults:
+    depth: $DEPTH_DEFAULT
+  remotes:
+    ingadhoc: https://github.com/ingadhoc/odoo-argentina.git
+  target: ingadhoc $ODOO_VERSION
+  merges:
+    - ingadhoc $ODOO_VERSION
+
+./ingadhoc-account-invoicing:
+  defaults:
+    depth: $DEPTH_DEFAULT
+  remotes:
+    ingadhoc: https://github.com/ingadhoc/account-invoicing.git
+  target: ingadhoc $ODOO_VERSION
+  merges:
+    - ingadhoc $ODOO_VERSION
+
+./ingadhoc-account-financial-tools:
+  defaults:
+    depth: $DEPTH_DEFAULT
+  remotes:
+    ingadhoc: https://github.com/ingadhoc/account-financial-tools.git
+  target: ingadhoc $ODOO_VERSION
+  merges:
+    - ingadhoc $ODOO_VERSION
+
+./ingadhoc-account-payment:
+  defaults:
+    depth: $DEPTH_DEFAULT
+  remotes:
+    ingadhoc: https://github.com/ingadhoc/account-payment.git
+  target: ingadhoc $ODOO_VERSION
+  merges:
+    - ingadhoc $ODOO_VERSION
+
+./ingadhoc-odoo-argentina-ce:
+  defaults:
+    depth: $DEPTH_DEFAULT
+  remotes:
+    ingadhoc: https://github.com/ingadhoc/odoo-argentina-ce.git
+  target: ingadhoc $ODOO_VERSION
+  merges:
+    - ingadhoc $ODOO_VERSION

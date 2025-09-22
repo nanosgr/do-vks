@@ -1,0 +1,10 @@
+git+https://github.com/OCA/openupgradelib.git@master
+unicodecsv
+unidecode
+jingtrang
+boto3
+dnspython
+ovh
+paramiko<4
+pyyaml
+tldextract
