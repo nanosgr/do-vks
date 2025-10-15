@@ -87,42 +87,6 @@
   merges:
     - cetmix-tower $ODOO_VERSION
 
-./ingadhoc-odoo-argentina:
-  defaults:
-    depth: $DEPTH_DEFAULT
-  remotes:
-    ingadhoc: https://github.com/ingadhoc/odoo-argentina.git
-  target: ingadhoc $ODOO_VERSION
-  merges:
-    - ingadhoc $ODOO_VERSION
-
-./ingadhoc-account-invoicing:
-  defaults:
-    depth: $DEPTH_DEFAULT
-  remotes:
-    ingadhoc: https://github.com/ingadhoc/account-invoicing.git
-  target: ingadhoc $ODOO_VERSION
-  merges:
-    - ingadhoc $ODOO_VERSION
-
-./ingadhoc-account-financial-tools:
-  defaults:
-    depth: $DEPTH_DEFAULT
-  remotes:
-    ingadhoc: https://github.com/ingadhoc/account-financial-tools.git
-  target: ingadhoc $ODOO_VERSION
-  merges:
-    - ingadhoc $ODOO_VERSION
-
-./ingadhoc-account-payment:
-  defaults:
-    depth: $DEPTH_DEFAULT
-  remotes:
-    ingadhoc: https://github.com/ingadhoc/account-payment.git
-  target: ingadhoc $ODOO_VERSION
-  merges:
-    - ingadhoc $ODOO_VERSION
-
 ./ingadhoc-odoo-argentina-ce:
   defaults:
     depth: $DEPTH_DEFAULT
