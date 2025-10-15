@@ -1,6 +1,7 @@
 web: -'*'
 server-ux: -'*'
 server-brand: -'*'
+server-tools: -'*'
 account-financial-tools: -'*'
 reporting-engine: -'*'
 account-financial-reporting: -'*'
