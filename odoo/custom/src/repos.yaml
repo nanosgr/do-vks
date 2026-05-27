@@ -78,6 +78,15 @@
   merges:
     - queue $ODOO_VERSION
 
+./helpdesk:
+  defaults:
+    depth: $DEPTH_DEFAULT
+  remotes:
+    helpdesk: https://github.com/OCA/helpdesk.git
+  target: helpdesk $ODOO_VERSION
+  merges:
+    - helpdesk $ODOO_VERSION
+
 ./cetmix-tower:
   defaults:
     depth: $DEPTH_DEFAULT
