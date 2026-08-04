@@ -87,15 +87,6 @@
   merges:
     - helpdesk $ODOO_VERSION
 
-./cetmix-tower:
-  defaults:
-    depth: $DEPTH_DEFAULT
-  remotes:
-    cetmix-tower: https://github.com/cetmix/cetmix-tower.git
-  target: cetmix-tower $ODOO_VERSION
-  merges:
-    - cetmix-tower $ODOO_VERSION
-
 ./ingadhoc-odoo-argentina-ce:
   defaults:
     depth: $DEPTH_DEFAULT
