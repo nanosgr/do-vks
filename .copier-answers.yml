@@ -14,11 +14,11 @@ domains_test: {}
 gitlab_url: ""
 odoo_dbfilter: ^prod
 odoo_initial_lang: es_AR
-odoo_listdb: true
+odoo_listdb: false
 odoo_listdb_staging: true
 odoo_oci_image: hub.docker.com/nanosgr/do-vks
 odoo_proxy: traefik
-odoo_version: 17.0
+odoo_version: 19.0
 paths_with_crawlers:
   - /web/image/website
 paths_without_crawlers:
@@ -36,7 +36,7 @@ smtp_relay_host: ""
 traefik_version: 2
 use_refurb: false
 whitelist_docker_project_devel: do-vks
-whitelist_docker_project_test: demo-do-vks-17
+whitelist_docker_project_test: demo-do-vks-19
 whitelisted_hosts_devel:
   - cdnjs.cloudflare.com
   - fonts.googleapis.com
