@@ -1,3 +1,4 @@
+openupgrade: -'*'
 web: -'*'
 server-ux: -'*'
 server-brand: -'*'
