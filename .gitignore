@@ -29,3 +29,6 @@
 
 # Project-specific docker configurations
 /.docker/
+/.claude/
+CLAUDE.md
+/docs/
