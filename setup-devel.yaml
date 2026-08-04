@@ -9,6 +9,7 @@
 
 services:
   odoo:
+    image: hub.docker.com/nanosgr/do-vks:18.0
     build:
       context: ./odoo
       args:

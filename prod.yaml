@@ -180,6 +180,20 @@ services:
       traefik.http.routers.do-vks-18-0-prod-allowedCrawlers-secure-1.tls: "true"
       traefik.http.routers.do-vks-18-0-prod-allowedCrawlers-secure-1.tls.certResolver: letsencrypt
 
+  db:
+    extends:
+      file: common.yaml
+      service: db
+    environment:
+      DB_HOST: do-vks-18-0-prod-db
+    env_file:
+      - .docker/db-creation.env
+    restart: unless-stopped
+    networks:
+      default:
+        aliases:
+          - "do-vks-18-0-prod-db"
+
 networks:
   default:
     driver_opts:

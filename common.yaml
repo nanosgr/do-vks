@@ -1,9 +1,10 @@
 services:
   odoo:
+    image: hub.docker.com/nanosgr/do-vks:18.0
     build:
       context: ./odoo
       args:
-        DB_VERSION: "latest"
+        DB_VERSION: "17"
         ODOO_VERSION: "18.0"
         UID: "${UID:-1000}"
         GID: "${GID:-1000}"
@@ -20,6 +21,18 @@ services:
       traefik.docker.network: "inverseproxy_shared"
       traefik.frontend.passHostHeader: "true"
       traefik.port: "8069"
+
+  db:
+    image: ghcr.io/tecnativa/postgres-autoconf:17-alpine
+    shm_size: 4gb
+    environment:
+      POSTGRES_DB: *dbname
+      POSTGRES_USER: *dbuser
+      PGDATA: "/var/lib/postgresql/data"
+      CONF_EXTRA: |
+        work_mem = 512MB
+    volumes:
+      - db:/var/lib/postgresql/data
 
   smtpfake:
     image: docker.io/mailhog/mailhog
