@@ -14,7 +14,7 @@ services:
       INITIAL_LANG: "es_AR"
       LIST_DB: "false"
       ODOO_BUS_PUBLIC_SAMESITE_WS: 1
-      PGHOST: do-vks-19-0-prod-db
+      PGHOST: do-vks-18-0-prod-db
     depends_on:
       - db
     networks:
@@ -36,163 +36,149 @@ services:
       traefik.main-1.frontend.rule: Host(`vikingosoftware.com`)
       traefik.longpolling-1.frontend.rule: Host(`vikingosoftware.com`);Path:/websocket,/websocket/{anything:.*}
       traefik.longpolling-1.port: 8072
-      traefik.http.middlewares.do-vks-19-0-prod-buffering.buffering.retryExpression:
+      traefik.http.middlewares.do-vks-18-0-prod-buffering.buffering.retryExpression:
         IsNetworkError() && Attempts() < 5
-      traefik.http.middlewares.do-vks-19-0-prod-compress.compress: "true"
-      traefik.http.middlewares.do-vks-19-0-prod-forbid-crawlers.headers.customResponseHeaders.X-Robots-Tag:
+      traefik.http.middlewares.do-vks-18-0-prod-compress.compress: "true"
+      traefik.http.middlewares.do-vks-18-0-prod-forbid-crawlers.headers.customResponseHeaders.X-Robots-Tag:
         "noindex, nofollow"
-      traefik.http.middlewares.do-vks-19-0-prod-addSTS.headers.forceSTSHeader: "true"
-      traefik.http.middlewares.do-vks-19-0-prod-forceSecure.redirectScheme.scheme: https
-      traefik.http.middlewares.do-vks-19-0-prod-forceSecure.redirectScheme.permanent: "true"
-      traefik.http.middlewares.do-vks-19-0-prod-override-ws-headers.headers.customRequestHeaders.X-Forwarded-Proto: "https"
-      traefik.http.services.do-vks-19-0-prod-main.loadbalancer.server.port: 8069
-      traefik.http.services.do-vks-19-0-prod-longpolling.loadbalancer.server.port: 8072
-      traefik.http.routers.do-vks-19-0-prod-main-0.rule: Host(`gestion.vikingosoftware.com`)
-      traefik.http.routers.do-vks-19-0-prod-main-0.service: do-vks-19-0-prod-main
-      traefik.http.routers.do-vks-19-0-prod-main-0.middlewares:
-        do-vks-19-0-prod-addSTS, do-vks-19-0-prod-buffering, do-vks-19-0-prod-compress,
-        do-vks-19-0-prod-forceSecure
-      traefik.http.routers.do-vks-19-0-prod-main-0.priority: 1
-      traefik.http.routers.do-vks-19-0-prod-main-secure-0.rule: Host(`gestion.vikingosoftware.com`)
-      traefik.http.routers.do-vks-19-0-prod-main-secure-0.service: do-vks-19-0-prod-main
-      traefik.http.routers.do-vks-19-0-prod-main-secure-0.middlewares:
-        do-vks-19-0-prod-addSTS, do-vks-19-0-prod-buffering, do-vks-19-0-prod-compress,
-        do-vks-19-0-prod-forceSecure
-      traefik.http.routers.do-vks-19-0-prod-main-secure-0.priority: 1
-      traefik.http.routers.do-vks-19-0-prod-main-secure-0.tls: "true"
-      traefik.http.routers.do-vks-19-0-prod-main-secure-0.tls.certResolver: letsencrypt
-      traefik.http.routers.do-vks-19-0-prod-longpolling-0.rule:
+      traefik.http.middlewares.do-vks-18-0-prod-addSTS.headers.forceSTSHeader: "true"
+      traefik.http.middlewares.do-vks-18-0-prod-forceSecure.redirectScheme.scheme: https
+      traefik.http.middlewares.do-vks-18-0-prod-forceSecure.redirectScheme.permanent: "true"
+      traefik.http.middlewares.do-vks-18-0-prod-override-ws-headers.headers.customRequestHeaders.X-Forwarded-Proto: "https"
+      traefik.http.services.do-vks-18-0-prod-main.loadbalancer.server.port: 8069
+      traefik.http.services.do-vks-18-0-prod-longpolling.loadbalancer.server.port: 8072
+      traefik.http.routers.do-vks-18-0-prod-main-0.rule: Host(`gestion.vikingosoftware.com`)
+      traefik.http.routers.do-vks-18-0-prod-main-0.service: do-vks-18-0-prod-main
+      traefik.http.routers.do-vks-18-0-prod-main-0.middlewares:
+        do-vks-18-0-prod-addSTS, do-vks-18-0-prod-buffering, do-vks-18-0-prod-compress,
+        do-vks-18-0-prod-forceSecure
+      traefik.http.routers.do-vks-18-0-prod-main-0.priority: 1
+      traefik.http.routers.do-vks-18-0-prod-main-secure-0.rule: Host(`gestion.vikingosoftware.com`)
+      traefik.http.routers.do-vks-18-0-prod-main-secure-0.service: do-vks-18-0-prod-main
+      traefik.http.routers.do-vks-18-0-prod-main-secure-0.middlewares:
+        do-vks-18-0-prod-addSTS, do-vks-18-0-prod-buffering, do-vks-18-0-prod-compress,
+        do-vks-18-0-prod-forceSecure
+      traefik.http.routers.do-vks-18-0-prod-main-secure-0.priority: 1
+      traefik.http.routers.do-vks-18-0-prod-main-secure-0.tls: "true"
+      traefik.http.routers.do-vks-18-0-prod-main-secure-0.tls.certResolver: letsencrypt
+      traefik.http.routers.do-vks-18-0-prod-longpolling-0.rule:
         Host(`gestion.vikingosoftware.com`) && Path(`/websocket`)
-      traefik.http.routers.do-vks-19-0-prod-longpolling-0.service: do-vks-19-0-prod-longpolling
-      traefik.http.routers.do-vks-19-0-prod-longpolling-0.middlewares:
-        do-vks-19-0-prod-addSTS, do-vks-19-0-prod-forceSecure,
-        do-vks-19-0-prod-override-ws-headers
-      traefik.http.routers.do-vks-19-0-prod-longpolling-0.priority: 20
-      traefik.http.routers.do-vks-19-0-prod-longpolling-secure-0.rule:
+      traefik.http.routers.do-vks-18-0-prod-longpolling-0.service: do-vks-18-0-prod-longpolling
+      traefik.http.routers.do-vks-18-0-prod-longpolling-0.middlewares:
+        do-vks-18-0-prod-addSTS, do-vks-18-0-prod-forceSecure,
+        do-vks-18-0-prod-override-ws-headers
+      traefik.http.routers.do-vks-18-0-prod-longpolling-0.priority: 20
+      traefik.http.routers.do-vks-18-0-prod-longpolling-secure-0.rule:
         Host(`gestion.vikingosoftware.com`) && Path(`/websocket`)
-      traefik.http.routers.do-vks-19-0-prod-longpolling-secure-0.service: do-vks-19-0-prod-longpolling
-      traefik.http.routers.do-vks-19-0-prod-longpolling-secure-0.middlewares:
-        do-vks-19-0-prod-addSTS, do-vks-19-0-prod-forceSecure,
-        do-vks-19-0-prod-override-ws-headers
-      traefik.http.routers.do-vks-19-0-prod-longpolling-secure-0.priority: 20
-      traefik.http.routers.do-vks-19-0-prod-longpolling-secure-0.tls: "true"
-      traefik.http.routers.do-vks-19-0-prod-longpolling-secure-0.tls.certResolver: letsencrypt
-      traefik.http.routers.do-vks-19-0-prod-forbiddenCrawlers-0.rule:
+      traefik.http.routers.do-vks-18-0-prod-longpolling-secure-0.service: do-vks-18-0-prod-longpolling
+      traefik.http.routers.do-vks-18-0-prod-longpolling-secure-0.middlewares:
+        do-vks-18-0-prod-addSTS, do-vks-18-0-prod-forceSecure,
+        do-vks-18-0-prod-override-ws-headers
+      traefik.http.routers.do-vks-18-0-prod-longpolling-secure-0.priority: 20
+      traefik.http.routers.do-vks-18-0-prod-longpolling-secure-0.tls: "true"
+      traefik.http.routers.do-vks-18-0-prod-longpolling-secure-0.tls.certResolver: letsencrypt
+      traefik.http.routers.do-vks-18-0-prod-forbiddenCrawlers-0.rule:
         Host(`gestion.vikingosoftware.com`) && (PathPrefix(`/web/`, `/website/info/`) ||
         Path(`/web`, `/website/info`))
-      traefik.http.routers.do-vks-19-0-prod-forbiddenCrawlers-0.service: do-vks-19-0-prod-main
-      traefik.http.routers.do-vks-19-0-prod-forbiddenCrawlers-0.middlewares:
-        do-vks-19-0-prod-addSTS, do-vks-19-0-prod-buffering, do-vks-19-0-prod-compress,
-        do-vks-19-0-prod-forbid-crawlers, do-vks-19-0-prod-forceSecure
-      traefik.http.routers.do-vks-19-0-prod-forbiddenCrawlers-0.priority: 10
-      traefik.http.routers.do-vks-19-0-prod-forbiddenCrawlers-secure-0.rule:
+      traefik.http.routers.do-vks-18-0-prod-forbiddenCrawlers-0.service: do-vks-18-0-prod-main
+      traefik.http.routers.do-vks-18-0-prod-forbiddenCrawlers-0.middlewares:
+        do-vks-18-0-prod-addSTS, do-vks-18-0-prod-buffering, do-vks-18-0-prod-compress,
+        do-vks-18-0-prod-forbid-crawlers, do-vks-18-0-prod-forceSecure
+      traefik.http.routers.do-vks-18-0-prod-forbiddenCrawlers-0.priority: 10
+      traefik.http.routers.do-vks-18-0-prod-forbiddenCrawlers-secure-0.rule:
         Host(`gestion.vikingosoftware.com`) && (PathPrefix(`/web/`, `/website/info/`) ||
         Path(`/web`, `/website/info`))
-      traefik.http.routers.do-vks-19-0-prod-forbiddenCrawlers-secure-0.service: do-vks-19-0-prod-main
-      traefik.http.routers.do-vks-19-0-prod-forbiddenCrawlers-secure-0.middlewares:
-        do-vks-19-0-prod-addSTS, do-vks-19-0-prod-buffering, do-vks-19-0-prod-compress,
-        do-vks-19-0-prod-forbid-crawlers, do-vks-19-0-prod-forceSecure
-      traefik.http.routers.do-vks-19-0-prod-forbiddenCrawlers-secure-0.priority: 10
-      traefik.http.routers.do-vks-19-0-prod-forbiddenCrawlers-secure-0.tls: "true"
-      traefik.http.routers.do-vks-19-0-prod-forbiddenCrawlers-secure-0.tls.certResolver: letsencrypt
-      traefik.http.routers.do-vks-19-0-prod-allowedCrawlers-0.rule:
+      traefik.http.routers.do-vks-18-0-prod-forbiddenCrawlers-secure-0.service: do-vks-18-0-prod-main
+      traefik.http.routers.do-vks-18-0-prod-forbiddenCrawlers-secure-0.middlewares:
+        do-vks-18-0-prod-addSTS, do-vks-18-0-prod-buffering, do-vks-18-0-prod-compress,
+        do-vks-18-0-prod-forbid-crawlers, do-vks-18-0-prod-forceSecure
+      traefik.http.routers.do-vks-18-0-prod-forbiddenCrawlers-secure-0.priority: 10
+      traefik.http.routers.do-vks-18-0-prod-forbiddenCrawlers-secure-0.tls: "true"
+      traefik.http.routers.do-vks-18-0-prod-forbiddenCrawlers-secure-0.tls.certResolver: letsencrypt
+      traefik.http.routers.do-vks-18-0-prod-allowedCrawlers-0.rule:
         Host(`gestion.vikingosoftware.com`) && (PathPrefix(`/web/image/website/`) ||
         Path(`/web/image/website`))
-      traefik.http.routers.do-vks-19-0-prod-allowedCrawlers-0.service: do-vks-19-0-prod-main
-      traefik.http.routers.do-vks-19-0-prod-allowedCrawlers-0.middlewares:
-        do-vks-19-0-prod-addSTS, do-vks-19-0-prod-buffering, do-vks-19-0-prod-compress,
-        do-vks-19-0-prod-forceSecure
-      traefik.http.routers.do-vks-19-0-prod-allowedCrawlers-0.priority: 100
-      traefik.http.routers.do-vks-19-0-prod-allowedCrawlers-secure-0.rule:
+      traefik.http.routers.do-vks-18-0-prod-allowedCrawlers-0.service: do-vks-18-0-prod-main
+      traefik.http.routers.do-vks-18-0-prod-allowedCrawlers-0.middlewares:
+        do-vks-18-0-prod-addSTS, do-vks-18-0-prod-buffering, do-vks-18-0-prod-compress,
+        do-vks-18-0-prod-forceSecure
+      traefik.http.routers.do-vks-18-0-prod-allowedCrawlers-0.priority: 100
+      traefik.http.routers.do-vks-18-0-prod-allowedCrawlers-secure-0.rule:
         Host(`gestion.vikingosoftware.com`) && (PathPrefix(`/web/image/website/`) ||
         Path(`/web/image/website`))
-      traefik.http.routers.do-vks-19-0-prod-allowedCrawlers-secure-0.service: do-vks-19-0-prod-main
-      traefik.http.routers.do-vks-19-0-prod-allowedCrawlers-secure-0.middlewares:
-        do-vks-19-0-prod-addSTS, do-vks-19-0-prod-buffering, do-vks-19-0-prod-compress,
-        do-vks-19-0-prod-forceSecure
-      traefik.http.routers.do-vks-19-0-prod-allowedCrawlers-secure-0.priority: 100
-      traefik.http.routers.do-vks-19-0-prod-allowedCrawlers-secure-0.tls: "true"
-      traefik.http.routers.do-vks-19-0-prod-allowedCrawlers-secure-0.tls.certResolver: letsencrypt
-      traefik.http.routers.do-vks-19-0-prod-main-1.rule: Host(`vikingosoftware.com`)
-      traefik.http.routers.do-vks-19-0-prod-main-1.service: do-vks-19-0-prod-main
-      traefik.http.routers.do-vks-19-0-prod-main-1.middlewares:
-        do-vks-19-0-prod-addSTS, do-vks-19-0-prod-buffering, do-vks-19-0-prod-compress,
-        do-vks-19-0-prod-forceSecure
-      traefik.http.routers.do-vks-19-0-prod-main-1.priority: 1
-      traefik.http.routers.do-vks-19-0-prod-main-secure-1.rule: Host(`vikingosoftware.com`)
-      traefik.http.routers.do-vks-19-0-prod-main-secure-1.service: do-vks-19-0-prod-main
-      traefik.http.routers.do-vks-19-0-prod-main-secure-1.middlewares:
-        do-vks-19-0-prod-addSTS, do-vks-19-0-prod-buffering, do-vks-19-0-prod-compress,
-        do-vks-19-0-prod-forceSecure
-      traefik.http.routers.do-vks-19-0-prod-main-secure-1.priority: 1
-      traefik.http.routers.do-vks-19-0-prod-main-secure-1.tls: "true"
-      traefik.http.routers.do-vks-19-0-prod-main-secure-1.tls.certResolver: letsencrypt
-      traefik.http.routers.do-vks-19-0-prod-longpolling-1.rule:
+      traefik.http.routers.do-vks-18-0-prod-allowedCrawlers-secure-0.service: do-vks-18-0-prod-main
+      traefik.http.routers.do-vks-18-0-prod-allowedCrawlers-secure-0.middlewares:
+        do-vks-18-0-prod-addSTS, do-vks-18-0-prod-buffering, do-vks-18-0-prod-compress,
+        do-vks-18-0-prod-forceSecure
+      traefik.http.routers.do-vks-18-0-prod-allowedCrawlers-secure-0.priority: 100
+      traefik.http.routers.do-vks-18-0-prod-allowedCrawlers-secure-0.tls: "true"
+      traefik.http.routers.do-vks-18-0-prod-allowedCrawlers-secure-0.tls.certResolver: letsencrypt
+      traefik.http.routers.do-vks-18-0-prod-main-1.rule: Host(`vikingosoftware.com`)
+      traefik.http.routers.do-vks-18-0-prod-main-1.service: do-vks-18-0-prod-main
+      traefik.http.routers.do-vks-18-0-prod-main-1.middlewares:
+        do-vks-18-0-prod-addSTS, do-vks-18-0-prod-buffering, do-vks-18-0-prod-compress,
+        do-vks-18-0-prod-forceSecure
+      traefik.http.routers.do-vks-18-0-prod-main-1.priority: 1
+      traefik.http.routers.do-vks-18-0-prod-main-secure-1.rule: Host(`vikingosoftware.com`)
+      traefik.http.routers.do-vks-18-0-prod-main-secure-1.service: do-vks-18-0-prod-main
+      traefik.http.routers.do-vks-18-0-prod-main-secure-1.middlewares:
+        do-vks-18-0-prod-addSTS, do-vks-18-0-prod-buffering, do-vks-18-0-prod-compress,
+        do-vks-18-0-prod-forceSecure
+      traefik.http.routers.do-vks-18-0-prod-main-secure-1.priority: 1
+      traefik.http.routers.do-vks-18-0-prod-main-secure-1.tls: "true"
+      traefik.http.routers.do-vks-18-0-prod-main-secure-1.tls.certResolver: letsencrypt
+      traefik.http.routers.do-vks-18-0-prod-longpolling-1.rule:
         Host(`vikingosoftware.com`) && Path(`/websocket`)
-      traefik.http.routers.do-vks-19-0-prod-longpolling-1.service: do-vks-19-0-prod-longpolling
-      traefik.http.routers.do-vks-19-0-prod-longpolling-1.middlewares:
-        do-vks-19-0-prod-addSTS, do-vks-19-0-prod-forceSecure,
-        do-vks-19-0-prod-override-ws-headers
-      traefik.http.routers.do-vks-19-0-prod-longpolling-1.priority: 20
-      traefik.http.routers.do-vks-19-0-prod-longpolling-secure-1.rule:
+      traefik.http.routers.do-vks-18-0-prod-longpolling-1.service: do-vks-18-0-prod-longpolling
+      traefik.http.routers.do-vks-18-0-prod-longpolling-1.middlewares:
+        do-vks-18-0-prod-addSTS, do-vks-18-0-prod-forceSecure,
+        do-vks-18-0-prod-override-ws-headers
+      traefik.http.routers.do-vks-18-0-prod-longpolling-1.priority: 20
+      traefik.http.routers.do-vks-18-0-prod-longpolling-secure-1.rule:
         Host(`vikingosoftware.com`) && Path(`/websocket`)
-      traefik.http.routers.do-vks-19-0-prod-longpolling-secure-1.service: do-vks-19-0-prod-longpolling
-      traefik.http.routers.do-vks-19-0-prod-longpolling-secure-1.middlewares:
-        do-vks-19-0-prod-addSTS, do-vks-19-0-prod-forceSecure,
-        do-vks-19-0-prod-override-ws-headers
-      traefik.http.routers.do-vks-19-0-prod-longpolling-secure-1.priority: 20
-      traefik.http.routers.do-vks-19-0-prod-longpolling-secure-1.tls: "true"
-      traefik.http.routers.do-vks-19-0-prod-longpolling-secure-1.tls.certResolver: letsencrypt
-      traefik.http.routers.do-vks-19-0-prod-forbiddenCrawlers-1.rule:
+      traefik.http.routers.do-vks-18-0-prod-longpolling-secure-1.service: do-vks-18-0-prod-longpolling
+      traefik.http.routers.do-vks-18-0-prod-longpolling-secure-1.middlewares:
+        do-vks-18-0-prod-addSTS, do-vks-18-0-prod-forceSecure,
+        do-vks-18-0-prod-override-ws-headers
+      traefik.http.routers.do-vks-18-0-prod-longpolling-secure-1.priority: 20
+      traefik.http.routers.do-vks-18-0-prod-longpolling-secure-1.tls: "true"
+      traefik.http.routers.do-vks-18-0-prod-longpolling-secure-1.tls.certResolver: letsencrypt
+      traefik.http.routers.do-vks-18-0-prod-forbiddenCrawlers-1.rule:
         Host(`vikingosoftware.com`) && (PathPrefix(`/web/`, `/website/info/`) ||
         Path(`/web`, `/website/info`))
-      traefik.http.routers.do-vks-19-0-prod-forbiddenCrawlers-1.service: do-vks-19-0-prod-main
-      traefik.http.routers.do-vks-19-0-prod-forbiddenCrawlers-1.middlewares:
-        do-vks-19-0-prod-addSTS, do-vks-19-0-prod-buffering, do-vks-19-0-prod-compress,
-        do-vks-19-0-prod-forbid-crawlers, do-vks-19-0-prod-forceSecure
-      traefik.http.routers.do-vks-19-0-prod-forbiddenCrawlers-1.priority: 10
-      traefik.http.routers.do-vks-19-0-prod-forbiddenCrawlers-secure-1.rule:
+      traefik.http.routers.do-vks-18-0-prod-forbiddenCrawlers-1.service: do-vks-18-0-prod-main
+      traefik.http.routers.do-vks-18-0-prod-forbiddenCrawlers-1.middlewares:
+        do-vks-18-0-prod-addSTS, do-vks-18-0-prod-buffering, do-vks-18-0-prod-compress,
+        do-vks-18-0-prod-forbid-crawlers, do-vks-18-0-prod-forceSecure
+      traefik.http.routers.do-vks-18-0-prod-forbiddenCrawlers-1.priority: 10
+      traefik.http.routers.do-vks-18-0-prod-forbiddenCrawlers-secure-1.rule:
         Host(`vikingosoftware.com`) && (PathPrefix(`/web/`, `/website/info/`) ||
         Path(`/web`, `/website/info`))
-      traefik.http.routers.do-vks-19-0-prod-forbiddenCrawlers-secure-1.service: do-vks-19-0-prod-main
-      traefik.http.routers.do-vks-19-0-prod-forbiddenCrawlers-secure-1.middlewares:
-        do-vks-19-0-prod-addSTS, do-vks-19-0-prod-buffering, do-vks-19-0-prod-compress,
-        do-vks-19-0-prod-forbid-crawlers, do-vks-19-0-prod-forceSecure
-      traefik.http.routers.do-vks-19-0-prod-forbiddenCrawlers-secure-1.priority: 10
-      traefik.http.routers.do-vks-19-0-prod-forbiddenCrawlers-secure-1.tls: "true"
-      traefik.http.routers.do-vks-19-0-prod-forbiddenCrawlers-secure-1.tls.certResolver: letsencrypt
-      traefik.http.routers.do-vks-19-0-prod-allowedCrawlers-1.rule:
+      traefik.http.routers.do-vks-18-0-prod-forbiddenCrawlers-secure-1.service: do-vks-18-0-prod-main
+      traefik.http.routers.do-vks-18-0-prod-forbiddenCrawlers-secure-1.middlewares:
+        do-vks-18-0-prod-addSTS, do-vks-18-0-prod-buffering, do-vks-18-0-prod-compress,
+        do-vks-18-0-prod-forbid-crawlers, do-vks-18-0-prod-forceSecure
+      traefik.http.routers.do-vks-18-0-prod-forbiddenCrawlers-secure-1.priority: 10
+      traefik.http.routers.do-vks-18-0-prod-forbiddenCrawlers-secure-1.tls: "true"
+      traefik.http.routers.do-vks-18-0-prod-forbiddenCrawlers-secure-1.tls.certResolver: letsencrypt
+      traefik.http.routers.do-vks-18-0-prod-allowedCrawlers-1.rule:
         Host(`vikingosoftware.com`) && (PathPrefix(`/web/image/website/`) ||
         Path(`/web/image/website`))
-      traefik.http.routers.do-vks-19-0-prod-allowedCrawlers-1.service: do-vks-19-0-prod-main
-      traefik.http.routers.do-vks-19-0-prod-allowedCrawlers-1.middlewares:
-        do-vks-19-0-prod-addSTS, do-vks-19-0-prod-buffering, do-vks-19-0-prod-compress,
-        do-vks-19-0-prod-forceSecure
-      traefik.http.routers.do-vks-19-0-prod-allowedCrawlers-1.priority: 100
-      traefik.http.routers.do-vks-19-0-prod-allowedCrawlers-secure-1.rule:
+      traefik.http.routers.do-vks-18-0-prod-allowedCrawlers-1.service: do-vks-18-0-prod-main
+      traefik.http.routers.do-vks-18-0-prod-allowedCrawlers-1.middlewares:
+        do-vks-18-0-prod-addSTS, do-vks-18-0-prod-buffering, do-vks-18-0-prod-compress,
+        do-vks-18-0-prod-forceSecure
+      traefik.http.routers.do-vks-18-0-prod-allowedCrawlers-1.priority: 100
+      traefik.http.routers.do-vks-18-0-prod-allowedCrawlers-secure-1.rule:
         Host(`vikingosoftware.com`) && (PathPrefix(`/web/image/website/`) ||
         Path(`/web/image/website`))
-      traefik.http.routers.do-vks-19-0-prod-allowedCrawlers-secure-1.service: do-vks-19-0-prod-main
-      traefik.http.routers.do-vks-19-0-prod-allowedCrawlers-secure-1.middlewares:
-        do-vks-19-0-prod-addSTS, do-vks-19-0-prod-buffering, do-vks-19-0-prod-compress,
-        do-vks-19-0-prod-forceSecure
-      traefik.http.routers.do-vks-19-0-prod-allowedCrawlers-secure-1.priority: 100
-      traefik.http.routers.do-vks-19-0-prod-allowedCrawlers-secure-1.tls: "true"
-      traefik.http.routers.do-vks-19-0-prod-allowedCrawlers-secure-1.tls.certResolver: letsencrypt
-
-  db:
-    extends:
-      file: common.yaml
-      service: db
-    environment:
-      DB_HOST: do-vks-19-0-prod-db
-    env_file:
-      - .docker/db-creation.env
-    restart: unless-stopped
-    networks:
-      default:
-        aliases:
-          - "do-vks-19-0-prod-db"
+      traefik.http.routers.do-vks-18-0-prod-allowedCrawlers-secure-1.service: do-vks-18-0-prod-main
+      traefik.http.routers.do-vks-18-0-prod-allowedCrawlers-secure-1.middlewares:
+        do-vks-18-0-prod-addSTS, do-vks-18-0-prod-buffering, do-vks-18-0-prod-compress,
+        do-vks-18-0-prod-forceSecure
+      traefik.http.routers.do-vks-18-0-prod-allowedCrawlers-secure-1.priority: 100
+      traefik.http.routers.do-vks-18-0-prod-allowedCrawlers-secure-1.tls: "true"
+      traefik.http.routers.do-vks-18-0-prod-allowedCrawlers-secure-1.tls.certResolver: letsencrypt
 
 networks:
   default:

@@ -9,13 +9,12 @@
 
 services:
   odoo:
-    image: hub.docker.com/nanosgr/do-vks:19.0
     build:
       context: ./odoo
       args:
         AGGREGATE: "false"
         DEPTH_DEFAULT: 100
-        ODOO_VERSION: "19.0"
+        ODOO_VERSION: "18.0"
         PYTHONOPTIMIZE: ""
         PIP_INSTALL_ODOO: "false"
         CLEAN: "false"
