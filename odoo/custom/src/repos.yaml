@@ -12,6 +12,7 @@
   target: odoo $ODOO_VERSION
   merges:
     - odoo $ODOO_VERSION
+    - openupgrade $ODOO_VERSION
     # Example of a merge of the PR with the number <PR>
     # - oca refs/pull/<PR>/head
 
