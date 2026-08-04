@@ -1,4 +1,5 @@
 openupgrade: -'*'
+spreadsheet: -'*'
 web: -'*'
 server-ux: -'*'
 server-brand: -'*'

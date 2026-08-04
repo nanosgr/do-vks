@@ -14,6 +14,15 @@
     - odoo $ODOO_VERSION
     # Example of a merge of the PR with the number <PR>
     # - oca refs/pull/<PR>/head
+./spreadsheet:
+  defaults:
+    depth: $DEPTH_DEFAULT
+  remotes:
+    spreadsheet: https://github.com/OCA/spreadsheet.git
+  target: spreadsheet $ODOO_VERSION
+  merges:
+    - spreadsheet $ODOO_VERSION
+
 ./openupgrade:
   defaults:
     depth: $DEPTH_DEFAULT
