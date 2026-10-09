@@ -50,6 +50,24 @@
   merges:
     - server-ux $ODOO_VERSION
 
+./server-auth:
+  defaults:
+    depth: $DEPTH_DEFAULT
+  remotes:
+    server-auth: https://github.com/OCA/server-auth.git
+  target: server-auth $ODOO_VERSION
+  merges:
+    - server-auth $ODOO_VERSION
+
+./server-backend:
+  defaults:
+    depth: $DEPTH_DEFAULT
+  remotes:
+    server-backend: https://github.com/OCA/server-backend.git
+  target: server-backend $ODOO_VERSION
+  merges:
+    - server-backend $ODOO_VERSION
+
 ./server-brand:
   defaults:
     depth: $DEPTH_DEFAULT
