@@ -1,0 +1,87 @@
+# Instancia demo (demo.vikingosoftware.com) para mostrar el sistema a potenciales
+# clientes. NO lo administra copier: se usa siempre junto con prod.yaml, como parte
+# del mismo proyecto de compose, para compartir la red "default" y el servicio "db":
+#
+#   docker compose -f prod.yaml -f prod-demo.yaml <comando>
+#
+# Usa su propia base ("demo"), su propio rol de Postgres ("odoo_demo", sin acceso a
+# "prod"), su propio filestore y su propia master password. Ver la sección 6 de
+# docs/doodba-guia-do-vks.md para el procedimiento completo.
+services:
+  odoo_demo:
+    extends:
+      file: common.yaml
+      service: odoo
+    restart: unless-stopped
+    hostname: "demo.vikingosoftware.com"
+    env_file:
+      - .docker/odoo-demo.env
+      - .docker/db-access-demo.env
+    environment:
+      DB_FILTER: "^demo$$"
+      DOODBA_ENVIRONMENT: "${DOODBA_ENVIRONMENT-prod}"
+      INITIAL_LANG: "es_AR"
+      LIST_DB: "false"
+      ODOO_BUS_PUBLIC_SAMESITE_WS: 1
+      PGDATABASE: demo
+      PGHOST: do-vks-18-0-prod-db
+      PGUSER: odoo_demo
+    command:
+      - odoo
+      - --workers=2
+      - --max-cron-threads=1
+    volumes:
+      - filestore_demo:/var/lib/odoo
+    depends_on:
+      - db
+    networks:
+      default:
+      inverseproxy_shared:
+    labels:
+      doodba.domain.main: "demo.vikingosoftware.com"
+      traefik.enable: "true"
+      traefik.http.middlewares.do-vks-18-0-demo-buffering.buffering.retryExpression:
+        IsNetworkError() && Attempts() < 5
+      traefik.http.middlewares.do-vks-18-0-demo-compress.compress: "true"
+      traefik.http.middlewares.do-vks-18-0-demo-forbid-crawlers.headers.customResponseHeaders.X-Robots-Tag:
+        "noindex, nofollow"
+      traefik.http.middlewares.do-vks-18-0-demo-addSTS.headers.forceSTSHeader: "true"
+      traefik.http.middlewares.do-vks-18-0-demo-forceSecure.redirectScheme.scheme: https
+      traefik.http.middlewares.do-vks-18-0-demo-forceSecure.redirectScheme.permanent: "true"
+      traefik.http.middlewares.do-vks-18-0-demo-override-ws-headers.headers.customRequestHeaders.X-Forwarded-Proto: "https"
+      traefik.http.services.do-vks-18-0-demo-main.loadbalancer.server.port: 8069
+      traefik.http.services.do-vks-18-0-demo-longpolling.loadbalancer.server.port: 8072
+      # Toda la demo lleva "X-Robots-Tag: noindex": no debe aparecer en buscadores
+      traefik.http.routers.do-vks-18-0-demo-main.rule: Host(`demo.vikingosoftware.com`)
+      traefik.http.routers.do-vks-18-0-demo-main.service: do-vks-18-0-demo-main
+      traefik.http.routers.do-vks-18-0-demo-main.middlewares:
+        do-vks-18-0-demo-addSTS, do-vks-18-0-demo-buffering, do-vks-18-0-demo-compress,
+        do-vks-18-0-demo-forbid-crawlers, do-vks-18-0-demo-forceSecure
+      traefik.http.routers.do-vks-18-0-demo-main.priority: 1
+      traefik.http.routers.do-vks-18-0-demo-main-secure.rule: Host(`demo.vikingosoftware.com`)
+      traefik.http.routers.do-vks-18-0-demo-main-secure.service: do-vks-18-0-demo-main
+      traefik.http.routers.do-vks-18-0-demo-main-secure.middlewares:
+        do-vks-18-0-demo-addSTS, do-vks-18-0-demo-buffering, do-vks-18-0-demo-compress,
+        do-vks-18-0-demo-forbid-crawlers, do-vks-18-0-demo-forceSecure
+      traefik.http.routers.do-vks-18-0-demo-main-secure.priority: 1
+      traefik.http.routers.do-vks-18-0-demo-main-secure.tls: "true"
+      traefik.http.routers.do-vks-18-0-demo-main-secure.tls.certResolver: letsencrypt
+      traefik.http.routers.do-vks-18-0-demo-longpolling.rule:
+        Host(`demo.vikingosoftware.com`) && Path(`/websocket`)
+      traefik.http.routers.do-vks-18-0-demo-longpolling.service: do-vks-18-0-demo-longpolling
+      traefik.http.routers.do-vks-18-0-demo-longpolling.middlewares:
+        do-vks-18-0-demo-addSTS, do-vks-18-0-demo-forceSecure,
+        do-vks-18-0-demo-override-ws-headers
+      traefik.http.routers.do-vks-18-0-demo-longpolling.priority: 20
+      traefik.http.routers.do-vks-18-0-demo-longpolling-secure.rule:
+        Host(`demo.vikingosoftware.com`) && Path(`/websocket`)
+      traefik.http.routers.do-vks-18-0-demo-longpolling-secure.service: do-vks-18-0-demo-longpolling
+      traefik.http.routers.do-vks-18-0-demo-longpolling-secure.middlewares:
+        do-vks-18-0-demo-addSTS, do-vks-18-0-demo-forceSecure,
+        do-vks-18-0-demo-override-ws-headers
+      traefik.http.routers.do-vks-18-0-demo-longpolling-secure.priority: 20
+      traefik.http.routers.do-vks-18-0-demo-longpolling-secure.tls: "true"
+      traefik.http.routers.do-vks-18-0-demo-longpolling-secure.tls.certResolver: letsencrypt
+
+volumes:
+  filestore_demo:
