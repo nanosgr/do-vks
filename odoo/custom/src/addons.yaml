@@ -10,8 +10,11 @@ reporting-engine: -'*'
 account-financial-reporting: -'*'
 queue: -'*'
 helpdesk: -'*'
-# printing_auto_shipment_advice queda afuera: depende de printing_auto_stock_picking
-# (OCA/report-print-send), repositorio que no está agregado en repos.yaml
+# Quedan afuera:
+# - printing_auto_shipment_advice: depende de printing_auto_stock_picking
+#   (OCA/report-print-send), repositorio que no está agregado en repos.yaml
+# - tms: su vista de conductores (tms.driver) hereda el formulario de contactos y
+#   falla con calendar instalado ("schedule_meeting is not a valid action")
 stock-logistics-transport:
   - shipment_advice
   - shipment_advice_planner
@@ -19,6 +22,5 @@ stock-logistics-transport:
   - stock_dock
   - stock_location_address
   - stock_location_address_purchase
-  - tms
 ingadhoc-odoo-argentina-ce: -'*'
 nanosgr: -'*'
