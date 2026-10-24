@@ -22,5 +22,6 @@ stock-logistics-transport:
   - stock_dock
   - stock_location_address
   - stock_location_address_purchase
+  - tms
 ingadhoc-odoo-argentina-ce: -'*'
 nanosgr: -'*'
