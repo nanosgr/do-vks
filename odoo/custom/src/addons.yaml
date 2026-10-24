@@ -10,5 +10,15 @@ reporting-engine: -'*'
 account-financial-reporting: -'*'
 queue: -'*'
 helpdesk: -'*'
+# printing_auto_shipment_advice queda afuera: depende de printing_auto_stock_picking
+# (OCA/report-print-send), repositorio que no está agregado en repos.yaml
+stock-logistics-transport:
+  - shipment_advice
+  - shipment_advice_planner
+  - stock_depot
+  - stock_dock
+  - stock_location_address
+  - stock_location_address_purchase
+  - tms
 ingadhoc-odoo-argentina-ce: -'*'
 nanosgr: -'*'

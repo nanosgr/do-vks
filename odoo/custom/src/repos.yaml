@@ -122,6 +122,15 @@
   merges:
     - helpdesk $ODOO_VERSION
 
+./stock-logistics-transport:
+  defaults:
+    depth: $DEPTH_DEFAULT
+  remotes:
+    stock-logistics-transport: https://github.com/OCA/stock-logistics-transport.git
+  target: stock-logistics-transport $ODOO_VERSION
+  merges:
+    - stock-logistics-transport $ODOO_VERSION
+
 ./ingadhoc-odoo-argentina-ce:
   defaults:
     depth: $DEPTH_DEFAULT
