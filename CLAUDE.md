@@ -5,13 +5,13 @@ this repository.
 
 ## Project Overview
 
-This is a Doodba-based Odoo 17.0 deployment project for Vikingo Software. Doodba is a
+This is a Doodba-based Odoo 18.0 deployment project for Vikingo Software. Doodba is a
 Docker-based development and deployment framework for Odoo that uses git-aggregator to
 manage multiple addon repositories.
 
 **Key characteristics:**
 
-- Odoo Version: 17.0
+- Odoo Version: 18.0
 - Database: PostgreSQL 17
 - Deployment framework: Doodba (Tecnativa)
 - Template: doodba-copier-template v9.0.0
@@ -56,10 +56,11 @@ multiple repositories. The configuration is in `odoo/custom/src/repos.yaml`:
 
 **Current repositories:**
 
-- OCA: web, server-ux, server-brand, account-financial-tools, reporting-engine,
-  account-financial-reporting, queue, helpdesk
-- Cetmix: cetmix-tower
+- OCA: OpenUpgrade, spreadsheet, web, server-ux, server-auth, server-backend,
+  server-brand, account-financial-tools, account-reconcile, reporting-engine,
+  account-financial-reporting, queue, helpdesk, stock-logistics-transport
 - INGADHOC: odoo-argentina-ce (localization)
+- nanosgr: vikingo_web_responsive
 
 ### Docker Architecture
 
@@ -75,19 +76,19 @@ Development services include:
 - `odoo` - Main Odoo service with debugpy support
 - `odoo_proxy` - Whitelist proxy for development
 - `db` - PostgreSQL with autoconf
-- `pgweb` - Database web UI (port 17081)
-- `smtp` - MailHog fake SMTP (port 17025)
-- `wdb` - Web debugger (port 17984)
+- `pgweb` - Database web UI (port 18081)
+- `smtp` - MailHog fake SMTP (port 18025)
+- `wdb` - Web debugger (port 18984)
 - Proxy services for external resources (Google Fonts, CDNs, etc.)
 
 **Port mappings (development):**
 
-- 17069 - Odoo web interface
-- 17072 - Odoo longpolling
-- 17081 - PgWeb database UI
-- 17025 - MailHog SMTP UI
-- 17984 - WDB debugger
-- 17899 - Debugpy Python debugger
+- 18069 - Odoo web interface
+- 18072 - Odoo longpolling
+- 18081 - PgWeb database UI
+- 18025 - MailHog SMTP UI
+- 18984 - WDB debugger
+- 18899 - Debugpy Python debugger
 
 ## Common Commands
 
@@ -311,7 +312,7 @@ Key environment variables (set in docker-compose files or shell):
 
 The project auto-generates a `.code-workspace` file with:
 
-- Python debugging configuration (debugpy on port 17899)
+- Python debugging configuration (debugpy on port 18899)
 - Browser debugging (Firefox, Chrome)
 - Tasks for start/stop/restart/install/test operations
 - Proper path mappings for all addon folders
@@ -344,7 +345,7 @@ Hooks run automatically on commit, or manually via `invoke lint`.
 
 ## Odoo Version Specifics
 
-This project uses Odoo 17.0:
+This project uses Odoo 18.0:
 
 - Python 3 is required (Python 3.10+)
 - Modern ORM features available

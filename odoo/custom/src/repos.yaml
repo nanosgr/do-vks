@@ -86,6 +86,15 @@
   merges:
     - account-financial-tools $ODOO_VERSION
 
+./account-reconcile:
+  defaults:
+    depth: $DEPTH_DEFAULT
+  remotes:
+    account-reconcile: https://github.com/OCA/account-reconcile.git
+  target: account-reconcile $ODOO_VERSION
+  merges:
+    - account-reconcile $ODOO_VERSION
+
 ./reporting-engine:
   defaults:
     depth: $DEPTH_DEFAULT

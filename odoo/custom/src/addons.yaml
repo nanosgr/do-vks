@@ -6,6 +6,10 @@ server-brand: -'*'
 server-auth: -'*'
 server-backend: -'*'
 account-financial-tools: -'*'
+account-reconcile:
+  - account_statement_base
+  - account_reconcile_model_oca
+  - account_reconcile_oca
 reporting-engine: -'*'
 account-financial-reporting: -'*'
 queue: -'*'
