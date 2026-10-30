@@ -1,0 +1,8 @@
+#!/bin/bash
+# pyafipws guarda los tickets de acceso (TA) del WSAA y los WSDL en
+# <site-packages>/pyafipws/cache, que pip deja como propiedad de root.
+# Odoo corre como usuario "odoo", así que le damos permisos de escritura.
+set -e
+cache_dir="$(python3 -c 'import os, pyafipws; print(os.path.join(os.path.dirname(pyafipws.__file__), "cache"))')"
+mkdir -p "$cache_dir"
+chown -R odoo:odoo "$cache_dir"
