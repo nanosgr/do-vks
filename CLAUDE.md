@@ -58,7 +58,8 @@ multiple repositories. The configuration is in `odoo/custom/src/repos.yaml`:
 
 - OCA: OpenUpgrade, spreadsheet, web, server-ux, server-auth, server-backend,
   server-brand, account-financial-tools, account-reconcile, reporting-engine,
-  account-financial-reporting, queue, helpdesk, stock-logistics-transport
+  account-financial-reporting, queue, helpdesk, stock-logistics-transport,
+  bank-statement-import
 - INGADHOC: odoo-argentina-ce (localization)
 - nanosgr: vikingo_web_responsive
 

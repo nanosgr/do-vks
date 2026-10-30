@@ -95,6 +95,15 @@
   merges:
     - account-reconcile $ODOO_VERSION
 
+./bank-statement-import:
+  defaults:
+    depth: $DEPTH_DEFAULT
+  remotes:
+    bank-statement-import: https://github.com/OCA/bank-statement-import.git
+  target: bank-statement-import $ODOO_VERSION
+  merges:
+    - bank-statement-import $ODOO_VERSION
+
 ./reporting-engine:
   defaults:
     depth: $DEPTH_DEFAULT
