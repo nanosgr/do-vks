@@ -341,6 +341,10 @@ Hooks run automatically on commit, or manually via `invoke lint`.
 - **Python dependencies** go in `odoo/custom/dependencies/pip.txt`
 - **System dependencies** go in `odoo/custom/dependencies/apt.txt`
 - **After updating repos.yaml**, always run `invoke git-aggregate` to apply changes
+- **Before removing a repo from repos.yaml/addons.yaml**, uninstall its modules in every
+  database (devel and prod). Otherwise they stay installed without code and their
+  inherited views break the UI (e.g. `rpc_helper` from OCA/server-tools, removed in
+  f880670, left an `ir.model` view referencing `rpc_config_edit`)
 - **After installing/updating modules**, use `invoke restart` to reload Odoo
 - **Tests must be run with workers=0** (automatically set by invoke test)
 
