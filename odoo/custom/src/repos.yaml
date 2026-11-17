@@ -142,29 +142,16 @@
 
 ./stock-logistics-transport:
   defaults:
-    depth: $DEPTH_DEFAULT
+    depth: $DEPTH_MERGE
   remotes:
     stock-logistics-transport: https://github.com/OCA/stock-logistics-transport.git
+    nanosgr: https://github.com/nanosgr/stock-logistics-transport.git
   target: stock-logistics-transport $ODOO_VERSION
   merges:
     - stock-logistics-transport $ODOO_VERSION
-  shell_command_after:
-    # tms.driver.vehicles_ids usa como inverso fleet.vehicle.driver_id (Many2one a
-    # res.partner) en lugar de tms_driver_id: al borrar un contacto lanza
-    # KeyError: 'vehicles_ids'. Quitar cuando se corrija en OCA.
-    - sed -i 's/fields.One2many("fleet.vehicle",
-      "driver_id")/fields.One2many("fleet.vehicle", "tms_driver_id")/'
-      tms/models/tms_driver.py
-    # En 18.0 group_expand se llama sin "order": tms.driver._read_group_stage_ids
-    # lo exige y la vista de choferes (kanban agrupada por etapa) lanza TypeError.
-    # Quitar cuando se corrija en OCA.
-    - sed -i 's/def _read_group_stage_ids(self, stages, domain, order):/def
-      _read_group_stage_ids(self, stages, domain, order=None):/'
-      tms/models/tms_driver.py
-    # Commitear los parches para que el repo no quede sucio: si no, el próximo
-    # git-aggregate falla con DirtyException al resetear.
-    - git -c safe.directory='*' -c user.name=doodba -c user.email=doodba@localhost
-      commit --no-verify -qam "Parches locales tms_driver"
+    # Fixes de tms.driver para 18.0 (inverso de vehicles_ids, group_expand sin
+    # "order" y schedule_meeting con calendar). Quitar cuando estén en OCA.
+    - nanosgr 18.0-fix-tms-driver
 
 ./ingadhoc-odoo-argentina-ce:
   defaults:
