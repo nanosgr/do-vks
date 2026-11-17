@@ -155,6 +155,12 @@
     - sed -i 's/fields.One2many("fleet.vehicle",
       "driver_id")/fields.One2many("fleet.vehicle", "tms_driver_id")/'
       tms/models/tms_driver.py
+    # En 18.0 group_expand se llama sin "order": tms.driver._read_group_stage_ids
+    # lo exige y la vista de choferes (kanban agrupada por etapa) lanza TypeError.
+    # Quitar cuando se corrija en OCA.
+    - sed -i 's/def _read_group_stage_ids(self, stages, domain, order):/def
+      _read_group_stage_ids(self, stages, domain, order=None):/'
+      tms/models/tms_driver.py
 
 ./ingadhoc-odoo-argentina-ce:
   defaults:
@@ -170,6 +176,17 @@
     depth: $DEPTH_DEFAULT
   remotes:
     nanosgr: https://github.com/nanosgr/vikingo_web_responsive.git
+  target: nanosgr $ODOO_VERSION
+  merges:
+    - nanosgr $ODOO_VERSION
+
+# Backport a 18.0 de los submódulos TMS (tms_sale, tms_purchase, tms_expense,
+# tms_account, ...) que OCA solo tiene en 17.0
+./tms:
+  defaults:
+    depth: $DEPTH_DEFAULT
+  remotes:
+    nanosgr: https://github.com/nanosgr/tms.git
   target: nanosgr $ODOO_VERSION
   merges:
     - nanosgr $ODOO_VERSION

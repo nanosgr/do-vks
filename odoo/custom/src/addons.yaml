@@ -51,3 +51,5 @@ nanosgr:
   - "*"
 l10n_ar_afipws_constancia:
   - l10n_ar_afipws_constancia
+tms:
+  - "*"
