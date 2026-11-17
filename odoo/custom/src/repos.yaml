@@ -161,6 +161,10 @@
     - sed -i 's/def _read_group_stage_ids(self, stages, domain, order):/def
       _read_group_stage_ids(self, stages, domain, order=None):/'
       tms/models/tms_driver.py
+    # Commitear los parches para que el repo no quede sucio: si no, el próximo
+    # git-aggregate falla con DirtyException al resetear.
+    - git -c safe.directory='*' -c user.name=doodba -c user.email=doodba@localhost
+      commit --no-verify -qam "Parches locales tms_driver"
 
 ./ingadhoc-odoo-argentina-ce:
   defaults:
