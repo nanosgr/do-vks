@@ -1,11 +1,19 @@
-openupgrade: -'*'
-spreadsheet: -'*'
-web: -'*'
-server-ux: -'*'
-server-brand: -'*'
-server-auth: -'*'
-server-backend: -'*'
-account-financial-tools: -'*'
+openupgrade:
+  - "*"
+spreadsheet:
+  - "*"
+web:
+  - "*"
+server-ux:
+  - "*"
+server-brand:
+  - "*"
+server-auth:
+  - "*"
+server-backend:
+  - "*"
+account-financial-tools:
+  - "*"
 account-reconcile:
   - account_statement_base
   - account_reconcile_model_oca
@@ -16,10 +24,14 @@ bank-statement-import:
   - account_statement_import_base
   - account_statement_import_file
   - account_statement_import_sheet_file
-reporting-engine: -'*'
-account-financial-reporting: -'*'
-queue: -'*'
-helpdesk: -'*'
+reporting-engine:
+  - "*"
+account-financial-reporting:
+  - "*"
+queue:
+  - "*"
+helpdesk:
+  - "*"
 # Quedan afuera:
 # - printing_auto_shipment_advice: depende de printing_auto_stock_picking
 #   (OCA/report-print-send), repositorio que no está agregado en repos.yaml
@@ -33,7 +45,9 @@ stock-logistics-transport:
   - stock_location_address
   - stock_location_address_purchase
   - tms
-ingadhoc-odoo-argentina-ce: -'*'
-nanosgr: -'*'
+ingadhoc-odoo-argentina-ce:
+  - "*"
+nanosgr:
+  - "*"
 l10n_ar_afipws_constancia:
   - l10n_ar_afipws_constancia
